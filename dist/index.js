@@ -6066,7 +6066,7 @@ async function run() {
     // const octokit = github.getOctokit(myToken, {userAgent: "MyActionVersion1"});
     const nbToKeep = core.getInput('nbToKeep');
     const packagesToKeep = [];
-    const tagsToKeep = core.getInput('tagsToKeep');
+    const tagsToKeep = JSON.parse(core.getInput('tagsToKeep'));
     const packageType = core.getInput('packageType');
     const packageName = core.getInput('packageName');
     const org = core.getInput('org');
