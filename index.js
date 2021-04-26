@@ -20,14 +20,13 @@ async function run() {
 
     // You can also pass in additional options as a second parameter to getOctokit
     // const octokit = github.getOctokit(myToken, {userAgent: "MyActionVersion1"});
-    // const nbToKeep = 3;
     const nbToKeep = core.getInput('nbToKeep');
     const packagesToKeep = [];
     const tagsToKeep = core.getInput('tagsToKeep');
     const packageType = core.getInput('packageType');
     const packageName = core.getInput('packageName');
     const org = core.getInput('org');
-    // const tagsToKeep = ['latest', 'stable', 'build'];
+
     const packages = await octokit.rest.packages.getAllPackageVersionsForPackageOwnedByOrg({
         package_type: packageType,
         package_name: packageName,
