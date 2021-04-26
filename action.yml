@@ -1,23 +1,27 @@
 name: 'Remove Old Packages'
 description: 'Remove Old Packages of GHCR.IO of repository'
 inputs:
-  owner:  # id of input
-    description: 'Owner'
+  packageName:  # id of input
+    description: 'Package Name'
     required: true
     default: 'Set By Github'
-  owner:  # id of input
-    description: 'Repo'
+  packageType:
+    description: 'Package Type'
+    required: true
+    default: 'container'
+  org:  # id of input
+    description: 'Organization'
     required: true
     default: 'Set By Github'
-  token:  # id of input
+  myToken:  # id of input
     description: 'Token Github'
     required: true
     default: 'Set By Github'
-  nbversion:  # id of input
+  nbToKeep:  # id of input
     description: 'Number of versions to keep'
     required: true
     default: '3'
-  protectedtags:  # id of input
+  tagsToKeep:  # id of input
     description: 'Protected tags'
     required: true
     default: 'latest, build, stable'
