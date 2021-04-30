@@ -6078,7 +6078,7 @@ async function run() {
     });
     let i = 0;
     Object.values(packages.data).forEach(package => {
-        if (arrayContainsMultipleValue(tagsToKeep, package.metadata.container.tags) || i < nbToKeep) {
+        if ((arrayContainsMultipleValue(tagsToKeep, package.metadata.container.tags) || i < nbToKeep) && !packagesToKeep.includes(package.id)) {
             packagesToKeep.push(package.id);
             if (!arrayContainsMultipleValue(tagsToKeep, package.metadata.container.tags))
                 i++;
@@ -6086,7 +6086,7 @@ async function run() {
     });
 
     Object.values(packages.data).forEach(package => {
-        if (!packagesToKeep.includes(package.id)) {
+        if (!packagesToKeep.includes(package.id) && !arrayContainsMultipleValue(tagsToKeep, package.metadata.container.tags)) {
             octokit.rest.packages.deletePackageVersionForOrg({
                 package_type: packageType,
                 package_name: packageName,
@@ -6097,6 +6097,7 @@ async function run() {
     });
 }
 run();
+
 })();
 
 module.exports = __webpack_exports__;
