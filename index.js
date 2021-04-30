@@ -42,7 +42,7 @@ async function run() {
     });
 
     Object.values(packages.data).forEach(package => {
-        if (!packagesToKeep.includes(package.id)) {
+        if (!packagesToKeep.includes(package.id) && !arrayContainsMultipleValue(tagsToKeep, package.metadata.container.tags)) {
             octokit.rest.packages.deletePackageVersionForOrg({
                 package_type: packageType,
                 package_name: packageName,
