@@ -34,7 +34,7 @@ async function run() {
     });
     let i = 0;
     Object.values(packages.data).forEach(package => {
-        if (arrayContainsMultipleValue(tagsToKeep, package.metadata.container.tags) || i < nbToKeep) {
+        if ((arrayContainsMultipleValue(tagsToKeep, package.metadata.container.tags) || i < nbToKeep) && !packagesToKeep.includes(package.id)) {
             packagesToKeep.push(package.id);
             if (!arrayContainsMultipleValue(tagsToKeep, package.metadata.container.tags))
                 i++;
