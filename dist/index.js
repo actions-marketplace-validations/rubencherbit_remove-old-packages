@@ -6045,11 +6045,11 @@ var __webpack_exports__ = {};
 const github = __nccwpck_require__(134);
 const core = __nccwpck_require__(127);
 function arrayContainsMultipleValue(neededElements, array) {
-    neededElements.forEach(needed => {
-        if (array.includes(needed)) {
+    for (let index = 0; index < neededElements.length; index++) {
+        if (array.includes(neededElements[index])) {
             return true;
         }
-    });
+    }
     return false;
 }
 
@@ -6086,7 +6086,7 @@ async function run() {
     });
 
     Object.values(packages.data).forEach(package => {
-        if (!packagesToKeep.includes(package.id) && !arrayContainsMultipleValue(tagsToKeep, package.metadata.container.tags)) {
+        if (!packagesToKeep.includes(package.id)) {
             octokit.rest.packages.deletePackageVersionForOrg({
                 package_type: packageType,
                 package_name: packageName,
@@ -6097,7 +6097,6 @@ async function run() {
     });
 }
 run();
-
 })();
 
 module.exports = __webpack_exports__;

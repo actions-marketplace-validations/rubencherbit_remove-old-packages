@@ -1,11 +1,11 @@
 const github = require('@actions/github');
 const core = require('@actions/core');
 function arrayContainsMultipleValue(neededElements, array) {
-    neededElements.forEach(needed => {
-        if (array.includes(needed)) {
+    for (let index = 0; index < neededElements.length; index++) {
+        if (array.includes(neededElements[index])) {
             return true;
         }
-    });
+    }
     return false;
 }
 
@@ -42,7 +42,7 @@ async function run() {
     });
 
     Object.values(packages.data).forEach(package => {
-        if (!packagesToKeep.includes(package.id) && !arrayContainsMultipleValue(tagsToKeep, package.metadata.container.tags)) {
+        if (!packagesToKeep.includes(package.id)) {
             octokit.rest.packages.deletePackageVersionForOrg({
                 package_type: packageType,
                 package_name: packageName,
